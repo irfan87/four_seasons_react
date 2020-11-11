@@ -11,13 +11,11 @@ const getSeason = (lat, month) => {
 
 const SeasonDisplay = ({ latitude, longitude }) => {
 	const season = getSeason(latitude, new Date().getMonth());
-	console.log(season);
 
+	console.log(season);
 	return (
 		<div className="seasonDisplay">
-			<h1>Season Display</h1>
-			<p>{latitude}</p>
-			<p>{longitude}</p>
+			{season ? <p>Let's hit the beach!</p> : <p>Eh?? So cold today, eh??</p>}
 		</div>
 	);
 };
