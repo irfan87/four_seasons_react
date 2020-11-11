@@ -19,14 +19,14 @@ class App extends Component {
 	}
 
 	render() {
-		if (this.state.errorMsg && !this.state.lat) {
-			return <div>Error: {this.state.errorMsg}</div>;
+		const { lat, lng, errorMsg } = this.state;
+
+		if (errorMsg && !lat) {
+			return <div>Error: {errorMsg}</div>;
 		}
 
-		if (!this.state.errorMsg && this.state.lat) {
-			return (
-				<SeasonDisplay latitude={this.state.lat} longitude={this.state.lng} />
-			);
+		if (!errorMsg && lat) {
+			return <SeasonDisplay latitude={lat} longitude={lng} />;
 		}
 
 		return <div>Loading</div>;
