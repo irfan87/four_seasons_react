@@ -11,11 +11,22 @@ const getSeason = (lat, month) => {
 
 const SeasonDisplay = ({ latitude, longitude }) => {
 	const season = getSeason(latitude, new Date().getMonth());
+	const seasonIcon = season === "winter" ? "snowflake" : "sun";
 
 	console.log(season);
 	return (
 		<div className="seasonDisplay">
-			{season ? <p>Let's hit the beach!</p> : <p>Eh?? So cold today, eh??</p>}
+			{season ? (
+				<>
+					<i className={`icon ${seasonIcon}`} />
+					<p>Let's hit the beach!</p>
+				</>
+			) : (
+				<>
+					<i className={`icon ${seasonIcon}`} />
+					<p>Eh?? So cold today, eh??</p>
+				</>
+			)}
 		</div>
 	);
 };
