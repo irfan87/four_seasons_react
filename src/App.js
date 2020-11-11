@@ -3,33 +3,37 @@ import "./App.css";
 import SeasonDisplay from "./components/SeasonDisplay";
 
 class App extends Component {
-	constructor(props) {
-		super(props);
+	// lat is latitude
+	state = { lat: null, lng: null, errorMsg: "" };
 
-		// lat is latitude
-		this.state = { lat: null };
-
+	componentDidMount() {
 		// get the user current location
 		window.navigator.geolocation.getCurrentPosition(
-			(position) => {
-				// to update or call the object, use this.setState({})
+			(position) =>
 				this.setState({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude,
-				});
-			},
-			(err) => console.error(err)
+				}),
+			(err) => this.setState({ errorMsg: err.message })
 		);
 	}
 
 	render() {
-		return (
-			<div className="app">
-				<h2>Latitude: {this.state.lat}</h2>
-				<h2>Longitude: {this.state.lng}</h2>
-				<SeasonDisplay />
-			</div>
-		);
+		if (this.state.errorMsg && !this.state.lat) {
+			return <div>Error: {this.state.errorMsg}</div>;
+		}
+
+		if (!this.state.errorMsg && this.state.lat) {
+			return (
+				<>
+					<div>Latitude: {this.state.lat}</div>
+					<div>Longitude: {this.state.lng}</div>
+					<SeasonDisplay />
+				</>
+			);
+		}
+
+		return <div>Loading</div>;
 	}
 }
 
