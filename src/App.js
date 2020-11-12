@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import SeasonDisplay from "./components/SeasonDisplay";
+import Spinner from "./components/Spinner";
 
 class App extends Component {
 	// lat is latitude
@@ -29,7 +30,7 @@ class App extends Component {
 			return <SeasonDisplay latitude={lat} longitude={lng} />;
 		}
 
-		return <div>Loading</div>;
+		return <Spinner />;
 	}
 }
 
