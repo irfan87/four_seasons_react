@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./SeasonDisplay.css";
+
 // config the season
 const seasonConfig = {
 	summer: {
@@ -12,7 +14,7 @@ const seasonConfig = {
 	},
 };
 
-// determine the season
+// determine the season by month
 const getSeason = (lat, month) => {
 	if (month > 2 && month < 9) {
 		return lat > 0 ? "summer" : "winter";
@@ -26,11 +28,12 @@ const SeasonDisplay = ({ latitude, longitude }) => {
 
 	const { text, iconName } = seasonConfig[season];
 
-	console.log(season);
+	// or you can use BEM convention if you prefer
 	return (
-		<div className="seasonDisplay">
-			<i className={`icon ${iconName}`} />
+		<div className={`seasonDisplay ${season}`}>
+			<i className={`icon ${iconName} massive seasonDisplay__iconLeft`} />
 			<h2>{text}</h2>
+			<i className={`icon ${iconName} massive seasonDisplay__iconRight`} />
 		</div>
 	);
 };
