@@ -19,7 +19,8 @@ class App extends Component {
 		);
 	}
 
-	render() {
+	// helper method for conditionals
+	renderContent = () => {
 		const { lat, lng, errorMsg } = this.state;
 
 		if (errorMsg && !lat) {
@@ -31,6 +32,10 @@ class App extends Component {
 		}
 
 		return <Spinner />;
+	};
+
+	render() {
+		return <div className="border red">{this.renderContent()}</div>;
 	}
 }
 
